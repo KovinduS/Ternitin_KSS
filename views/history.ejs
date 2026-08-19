@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan History - Ternitin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/history.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <canvas id="bg-canvas" class="bg-canvas"></canvas>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <i data-lucide="sun" class="icon-sun"></i>
+    <i data-lucide="moon" class="icon-moon"></i>
+  </button>
+
+  <nav class="navbar glass">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <i data-lucide="shield-check" class="logo-icon"></i>
+        <span class="logo-text">Ternitin</span>
+      </a>
+      <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/#features" class="nav-link">Features</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="history-page">
+    <div class="container">
+      <header class="section-header">
+        <h2>Scan History</h2>
+        <p>All your past document scans and analyses</p>
+      </header>
+
+      <!-- Stats Dashboard -->
+      <div class="stats-dashboard" id="statsDashboard">
+        <div class="stat-card glass">
+          <div class="stat-icon">
+            <i data-lucide="database"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="statTotal">-</span>
+            <span class="stat-label">Total Scans</span>
+          </div>
+        </div>
+
+        <div class="stat-card glass">
+          <div class="stat-icon">
+            <i data-lucide="check-circle"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="statSuccess">-</span>
+            <span class="stat-label">Completed</span>
+          </div>
+        </div>
+
+        <div class="stat-card glass">
+          <div class="stat-icon">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="statPlagiarism">-</span>
+            <span class="stat-label">Avg Plagiarism</span>
+          </div>
+        </div>
+
+        <div class="stat-card glass">
+          <div class="stat-icon">
+            <i data-lucide="cpu"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="statAI">-</span>
+            <span class="stat-label">Avg AI Score</span>
+          </div>
+        </div>
+
+        <div class="stat-card glass">
+          <div class="stat-icon">
+            <i data-lucide="file-text"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="statWords">-</span>
+            <span class="stat-label">Words Scanned</span>
+          </div>
+        </div>
+
+        <div class="stat-card glass">
+          <div class="stat-icon">
+            <i data-lucide="trending-up"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="statRecent">-</span>
+            <span class="stat-label">This Week</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="history-actions">
+        <div class="filter-group">
+          <select id="statusFilter" class="glass">
+            <option value="">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="processing">Processing</option>
+            <option value="failed">Failed</option>
+          </select>
+
+          <select id="sortBy" class="glass">
+            <option value="createdAt">Date</option>
+            <option value="wordCount">Word Count</option>
+            <option value="status">Status</option>
+          </select>
+
+          <select id="sortOrder" class="glass">
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
+          </select>
+        </div>
+
+        <button class="btn btn-danger" id="clearAll">
+          <i data-lucide="trash-2"></i>
+          Clear All
+        </button>
+      </div>
+
+      <!-- History List -->
+      <div class="history-list" id="historyList">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          Loading history...
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination" hidden>
+        <button class="btn btn-secondary" id="prevPage">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        <span id="pageInfo">Page 1</span>
+        <button class="btn btn-secondary" id="nextPage">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- View Modal -->
+  <div class="modal" id="viewModal" role="dialog" aria-modal="true">
+    <div class="modal-overlay"></div>
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h2 id="viewModalTitle">Scan Details</h2>
+        <button class="modal-close" id="closeViewModal" aria-label="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="viewModalBody"></div>
+    </div>
+  </div>
+
+  <script src="/js/history.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
